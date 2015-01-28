@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="sections/create-update-todo/create-update.css">
     <!-- endbuild -->
 </head>
-<body>
+<body ng-app="ToDoApp" class="ng-cloak">
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -33,32 +33,40 @@
 <![endif]-->
 <div>
 
-  <div class="landing-page">
-    <div class="card-container">
+<!--   <div class="landing-page" ng-controller="LandingCtrl as ctrl">
+    <div class="card-container" ng-repeat="todo in ctrl.toDoList">
       <div>
-        <div class="todo-card">
-          <div class="row">
+        <div class="todo-card" ng-class="ctrl.getStyle(todo)"> -->
+        <!-- ng-class="{completed: todo.completed}" -->
+         <!--  <div class="row">
             <div>
-              <span class="title">Author:</span>
-              <span class="author">Shyam Seshadri</span>
+              <span class="title">Author {{ $index+1 }}:</span>
+              <span class="author" ng-bind="todo.author">Shyam Seshadri</span>
             </div>
-            <div class="todo-title">This is the first todo</div>
+            <div class="todo-title" ng-bind="todo.title">This is the first todo</div>
             <div>
               <span class="title">Due On:</span>
-              <span class="date">19/09/2014</span>
+              <span class="date" ng-bind="todo.dueOn">19/09/2014</span>
             </div>
           </div>
         </div>
       </div>
+    </div> -->
+    <div ng-controller="CreateToDoCtrl as createCtrl">
+      <div class="alert alert-info" ng-bind="createCtrl.msg" ng-show="createCtrl.msg"></div>
+      <form name="todoForm" ng-submit="createCtrl.addToList()">
+        <input ng-model="createCtrl.todo.author" placeholder="Author Name" required>
+        <input ng-model="createCtrl.todo.title" placeholder="Author Title" required>
+        <input type="submit" value="Add" ng-disabled="todoForm.$invalid">
+      </form>
     </div>
-
-    <div class="card-container">
+    <!-- <div class="card-container">
       <div>
         <div class="todo-card">
           <div class="row">
             <div>
               <span class="title">Author:</span>
-              <span class="author">Shyam Seshadri</span>
+              <span class="author" ng-bind="ctrl.SecondtoDo.author">Shyam Seshadri</span>
             </div>
             <div class="todo-title">This is the second todo</div>
             <div>
@@ -70,7 +78,7 @@
       </div>
     </div>
   </div>
-
+ -->
 </div>
 
 <script src="vendors/jquery.js"></script>
